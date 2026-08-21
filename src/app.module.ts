@@ -1,16 +1,15 @@
 import { Module } from "@nestjs/common";
-import { AppController } from "./app.controller";
-import { AppService } from "./app.service";
 import { SequelizeModule } from "@nestjs/sequelize";
+import { UsersModule } from './users/users.module';
 
 // @Module — декоратор, который объединяет разные части кода в один блок (модуль).
 // NestJS не увидит ваши файлы, если они не зарегистрированы в модуле.
 @Module({
   // controllers — массив, куда мы ОБЯЗАТЕЛЬНО записываем все контроллеры этого модуля, чтобы NestJS прочитал их роуты.
-  controllers: [AppController],
+  controllers: [],
   // providers — массив, куда мы ОБЯЗАТЕЛЬНО записываем сервисы.
   // Это дает сигнал NestJS: "Возьми этот класс под свой контроль, чтобы при необходимости создавать его объекты и вставлять в конструкторы".
-  providers: [AppService],
+  providers: [],
   // imports — массив, куда можно подключать ТОЛЬКО другие модули (классы с декоратором @Module).
   // Сюда идут как сторонние библиотеки (например, для работы с БД), так и наши собственные другие модули проекта.
   imports: [
@@ -27,6 +26,7 @@ import { SequelizeModule } from "@nestjs/sequelize";
       autoLoadModels: true, // autoLoadModels: true — заставляет NestJS автоматически находить все файлы таблиц (моделей) по всему проекту и регистрировать их в базе данных.
       // Больше не нужно вручную импортировать и вписывать каждую таблицу в массив "models" выше.
     }),
+    UsersModule,
   ],
 })
 export class AppModule {}
