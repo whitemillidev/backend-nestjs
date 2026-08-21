@@ -19,7 +19,7 @@ import { ConfigModule } from "@nestjs/config";
     ConfigModule.forRoot({
       // envFilePath — свойство-настройка, которое указывает фреймворку точный путь, к текстовому файлу с переменными окружения.
       // В данном случае объявляем: "Читай файл с именем .env в корне проекта".
-      envFilePath: ".env",
+      envFilePath: `.${process.env.NODE_ENV}.env`,
     }),
     // SequelizeModule — это готовый модуль для работы с базой данных ORM Sequelize.
     // .forRoot() — специальный метод-настройщик, динамически настраивает подключение к базе данных Postgres.
