@@ -2,6 +2,7 @@ import { Module } from "@nestjs/common";
 import { SequelizeModule } from "@nestjs/sequelize";
 import { UsersModule } from "./users/users.module";
 import { ConfigModule } from "@nestjs/config";
+import { User } from "./users/users.model";
 
 // @Module — декоратор, который объединяет разные части кода в один блок (модуль).
 // NestJS не увидит ваши файлы, если они не зарегистрированы в модуле.
@@ -31,7 +32,9 @@ import { ConfigModule } from "@nestjs/config";
       username: process.env.POSTGRES_USER, // Имя пользователя в вашей базе данных
       password: process.env.POSTGRES_PASSWORD, // Пароль от вашей базы данных Postgres
       database: process.env.POSTGRES_DB, // Название конкретной базы данных, которую создали для проекта
-      models: [], // Массив Таблиц (Моделей). Пока пустой, сюда позже добавятся файлы-чертежи таблиц (например, User)
+      // models — массив, куда мы передаем классы-чертежи наших таблиц.
+      // Добавив сюда [User], мы явно приказали Sequelize зарегистрировать модель пользователя в базе данных.
+      models: [User],
       autoLoadModels: true, // autoLoadModels: true — заставляет NestJS автоматически находить все файлы таблиц (моделей) по всему проекту и регистрировать их в базе данных.
       // Больше не нужно вручную импортировать и вписывать каждую таблицу в массив "models" выше.
     }),
